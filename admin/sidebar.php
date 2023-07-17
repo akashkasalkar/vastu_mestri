@@ -3,7 +3,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'seller_index' %}">
+      <a class="nav-link" href="./home.php">
         <i class="mdi mdi-grid-large menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
@@ -34,10 +34,10 @@
       </a>
       <div class="collapse" id="manage-orders">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'new_orders' %}">New Orders</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'pending_orders' %}">Pending Orders</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'rejected_orders' %}">Rejected Orders</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'completed_orders' %}">Completed Orders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./newOrder.php">New Orders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./pendingOrder.php">Pending Orders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./rejectedOrder.php">Rejected Orders</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./completedOrder.php">Completed Orders</a></li>
         </ul>
       </div>
     </li>
@@ -51,8 +51,8 @@
       </a>
       <div class="collapse" id="manage-users">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'seller_view_user' %}">View Users</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">Blocked Users</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./viewUser.php">View Users</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./blockUser.php">Blocked Users</a></li>
         </ul>
       </div>
     </li>
@@ -66,7 +66,7 @@
       </a>
       <div class="collapse" id="manage-settings">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="#">Change Password</a></li>
+          <li class="nav-item"> <a class="nav-link" href="./changePassword.php">Change Password</a></li>
         </ul>
       </div>
     </li>
