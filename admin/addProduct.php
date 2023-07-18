@@ -11,30 +11,30 @@
                     <form class="forms-sample" enctype="multipart/form-data"  method="post" action="">
                         <div class="form-group">
                             <label for="p_name">Product name</label>
-                            <input type="text" class="form-control form-control-lg" name="p_name" id="p_name" placeholder="">
+                            <input type="text" class="form-control " name="p_name" id="p_name" placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="p_desc">Product description</label>
-                            <textarea type="text" class="form-control form-control-lg" name="p_desc" id="p_desc"></textarea>
+                            <textarea type="text" class="form-control " name="p_desc" id="p_desc"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="p_photo">Product photo</label>
-                            <input type="file" class="form-control form-control-lg"  name="p_photo" id="p_photo">
+                            <input type="file" class="form-control "  name="p_photo" id="p_photo">
                         </div>
                         <div class="form-group">
                             <label for="p_price">Product price - ₹</label>
-                            <input type="text" class="form-control form-control-lg" name="p_price" id="p_price" placeholder="eg. 100">
+                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100">
                         </div>
                         <div class="form-group">
                             <label for="p_discount">Product discount - ₹</label>
-                            <input type="text" class="form-control form-control-lg" name="p_discount" id="p_discount" placeholder="eg. 5">
+                            <input type="text" class="form-control " name="p_discount" id="p_discount" placeholder="eg. 5">
                         </div>
                         <div class="form-group">
                             <label for="p_qty">Product quantity - </label>
-                            <input type="text" class="form-control form-control-lg" name="p_qty" id="p_qty" placeholder="eg. 120">
+                            <input type="text" class="form-control " name="p_qty" id="p_qty" placeholder="eg. 120">
                         </div>
                         <div class="form-group">
-                            <select id="cat" class="js-example-basic-single w-100" name="cat">
+                            <select id="cat" class="js-example-basic-single form-control" name="cat">
                                 <option >Select Category</option>
                                 <option value=""></option>
                             </select>

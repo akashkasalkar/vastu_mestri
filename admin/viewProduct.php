@@ -11,7 +11,7 @@
                                         <div class="card-body">
                                           <h4 class="card-title">Products</h4>
                                         <a href="./addProduct.php">
-                                          <button type="button" class="btn btn-info btn-rounded btn-fw">Add new Product</button>
+                                          <button type="button" class="btn btn-info ">Add new Product</button>
                                         </a>
                                           <div class="table-responsive pt-3">
                                             <table class="table table-bordered">

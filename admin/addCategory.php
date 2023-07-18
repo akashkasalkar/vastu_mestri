@@ -1,6 +1,4 @@
-<?php
-include("../dbconn.php");
-?>
+
 <?php include './sidebar.php' ?>
 <div class="main-panel">
                 <div class="content-wrapper">
