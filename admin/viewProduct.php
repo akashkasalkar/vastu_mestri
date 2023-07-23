@@ -21,24 +21,58 @@
                                                   <th>Photo</th>
                                                   <th>Name</th>
                                                   <th>Description</th>
-                                                  <th>Price</th>
-                                                  <th>Discount</th>
-                                                  <th>Quantity</th>
                                                   <th>Category</th>
+                                                  <th>Brand</th>
+                                                  <th>Sub-Category</th>
+                                                  <th>Size</th>
+
+                                                  <th>Price</th>
+                                                  <th>Discount</th>                  
                                                   <th> Edit</th>
                                                   <th> Delete </th>
                                                 </tr>
                                               </thead>
                                               <tbody>
+                                                <?php 
+                                                  $qry="select *,p.photo as p_photo,p.description as p_description,s.description as s_description,c.name as category_name,sc.name sc_name
+                                                  from product p,brand b,category c,sub_category sc,size s
+                                                  where p.fk_sub_cat_id=sc.id
+                                          
+                                                  AND sc.fk_brand_id=b.brand_id
+                                                  AND b.fk_category_id=c.category_id";
+                                                  $exc=mysqli_query($con,$qry);
+                                                  $i=1;
+                                                  while($row=mysqli_fetch_array($exc)){
+                                                    ?>
+
+                                                  
                                                 <tr>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td></td>
+                                                  <td><?php echo $i ?></td>
+                                                  <td><img src="./resources/product/<?php echo $row['product_id'].'/'.$row['p_photo'] ?>" alt=""style="width:100px;height:100px;"></td>
+                                                  <td><?php echo $row['product_name'] ?></td>
+                                                  <td><?php echo $row['p_description'] ?></td>
+                                                  <td><?php echo $row['category_name'] ?></td>
+                                                  <td><?php echo $row['brand_name'] ?></td>
+                                                  <td><?php echo $row['sc_name'] ?></td>
+
+                                                  <td colspan="3">
+
+                                                    <table class="table table-stripped">
+                                                      <tr>
+                                                        <td>1*1</td>
+                                                        <td>200</td>
+                                                        <td>10</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td colspan="3" class="text-center">
+                                                            <a href="./upgradeProductDetails.php?product_id=<?php echo $row['product_id'] ?>" class="btn btn-primary text-light ">Add</a>
+
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                              
+                                                  
                                                   <td>
                                                       <a href=""><button type="button" class="btn btn-info btn-rounded btn-fw">Edit</button></a>
                                                   </td>
@@ -46,6 +80,10 @@
                                                     <a href=""><button type="button" class="btn btn-danger btn-rounded btn-fw">Delete</button></a> 
                                                   </td>
                                                 </tr>
+                                                <?php
+                                                $i++;
+                                                  }
+                                                ?>
                                               </tbody>
                                             </table>
                                           </div>

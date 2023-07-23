@@ -4,7 +4,7 @@
             <div class="col-md-12 col-lg-12 col-sm-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add new product</h4>
+                    <h4 class="card-title">Upgrade product details</h4>
                     <a href="./viewProduct.php" style="margin-left : 1000px">
                         <button type="button" class="btn btn-info  btn-fw text-black" >view product</button>
                     </a>
@@ -17,24 +17,8 @@
                             <label for="p_desc">Product description</label>
                             <textarea type="text" class="form-control " name="p_desc" id="p_desc" required></textarea>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="">Select Category</label>
-                            <select id="cat" class="js-example-basic-single form-control"  name="s_cat_id" required>
-                                <option value="#" selected disabled >Select Category</option>
-                                <?php 
-                        $qry="select *,sc.discount as sc_discount from sub_category sc,brand b 
-                              where sc.fk_brand_id=b.brand_id
-                        ";
-                        $exc=mysqli_query($con,$qry);
-                        $i=1;
-                        while($row=mysqli_fetch_array($exc)) {
-                           
-                        ?>
-                                <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <!-- <div class="form-group">
                             <label for="">Select Size</label>
                             <select id="cat" class="js-example-basic-single form-control"  name="p_size" required>
                                 <option value="#" selected disabled >Select Size</option>
@@ -49,19 +33,27 @@
                                 <option value="<?php echo $row['id'] ?>"><?php echo $row['description'] ?></option>
                                 <?php } ?>
                             </select>
-                        </div> -->
-                        <div class="form-group">
-                            <label for="p_photo">Product photo</label>
-                            <input type="file" class="form-control "  name="p_photo" id="p_photo" required>
                         </div>
-                        <!-- <div class="form-group">
+                      
+                        <div class="form-group">
+                            <label for="p_price">cgst - %</label>
+                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_price">Product price - ₹</label>
+                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                        </div><div class="form-group">
+                            <label for="p_price">Product price - ₹</label>
+                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                        </div>
+                        <div class="form-group">
                             <label for="p_price">Product price - ₹</label>
                             <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
                         </div>
                         <div class="form-group">
                             <label for="p_discount">Product discount - ₹</label>
                             <input type="text" class="form-control " name="p_discount" id="p_discount" value="0" placeholder="eg. 5" required>
-                        </div> -->
+                        </div>
                   
                        
                         <button type="submit" class="btn btn-rounded btn-outline-primary" name="add">Add</button>
