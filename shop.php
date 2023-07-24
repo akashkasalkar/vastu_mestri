@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <?php $product_type=$_REQUEST['sub_cat_id']; include('./common/product.php')?>
+                    <?php $product_type=$_REQUEST['name']; include('./common/product.php')?>
                     <div class="col-12">
                         <nav>
                             <ul class="pagination justify-content-center">
