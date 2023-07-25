@@ -27,15 +27,18 @@
                                                   <th>Size</th>
 
                                                   <th>Price</th>
-                                                  <th>Discount</th>                  
+                                                  <th>Discount</th> 
+                                                  <th>cgst</th>
+                                                  <th>sgst</th>
+                                                  <th>igst</th>                 
                                                   <th> Edit</th>
                                                   <th> Delete </th>
                                                 </tr>
                                               </thead>
                                               <tbody>
                                                 <?php 
-                                                  $qry="select *,p.photo as p_photo,p.description as p_description,s.description as s_description,c.name as category_name,sc.name sc_name
-                                                  from product p,brand b,category c,sub_category sc,size s
+                                                  $qry="select *,p.photo as p_photo,p.description as p_description,c.name as category_name,sc.name sc_name
+                                                  from product p,brand b,category c,sub_category sc
                                                   where p.fk_sub_cat_id=sc.id
                                           
                                                   AND sc.fk_brand_id=b.brand_id
@@ -43,6 +46,7 @@
                                                   $exc=mysqli_query($con,$qry);
                                                   $i=1;
                                                   while($row=mysqli_fetch_array($exc)){
+                                                    $p_id=$row['product_id'];
                                                     ?>
 
                                                   
@@ -55,16 +59,32 @@
                                                   <td><?php echo $row['brand_name'] ?></td>
                                                   <td><?php echo $row['sc_name'] ?></td>
 
-                                                  <td colspan="3">
+                                                  <td colspan="6">
 
                                                     <table class="table table-stripped">
+                                                      <?php 
+                                                        $qry2="select * from product_price_details,size 
+                                                        where  product_price_details.fk_size_id=size.id
+                                                        and fk_product_id='$p_id'";
+                                                        $exc2=mysqli_query($con,$qry2);
+                                                        while($row2=mysqli_fetch_array($exc2)){
+                                                          ?>
                                                       <tr>
-                                                        <td>1*1</td>
-                                                        <td>200</td>
-                                                        <td>10</td>
+                                                      <td><?php echo $row2['description'] ?></td>
+                                                      <td><?php echo $row2['price'] ?></td>
+                                                      <td><?php echo $row2['discount'] ?></td>
+                                                      <td><?php echo $row2['cgst'] ?>%</td>
+                                                      <td><?php echo $row2['sgst'] ?>%</td>
+                                                      <td><?php echo $row2['igst'] ?>%</td>
+
+
                                                       </tr>
+                                                          <?php
+                                                        }
+                                                      ?>
+                                                      
                                                       <tr>
-                                                        <td colspan="3" class="text-center">
+                                                        <td colspan="6" class="text-center">
                                                             <a href="./upgradeProductDetails.php?product_id=<?php echo $row['product_id'] ?>" class="btn btn-primary text-light ">Add</a>
 
                                                         </td>

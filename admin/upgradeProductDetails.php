@@ -8,14 +8,29 @@
                     <a href="./viewProduct.php" style="margin-left : 1000px">
                         <button type="button" class="btn btn-info  btn-fw text-black" >view product</button>
                     </a>
+                    <?php 
+                        if(!isset($_GET['product_id'])){
+                            echo "<script>location='./viewProduct.php'</script>";
+                        }
+                        else{
+                            $p_id=$_GET['product_id'];
+                            $qry="select * from product where product_id='$p_id'";
+                            $exc=mysqli_query($con,$qry);
+                            while($row=mysqli_fetch_array($exc)){
+                                $p_name=$row['product_name'];
+                                $description=$row['description'];
+
+                            }
+                        }
+                    ?>
                     <form class="forms-sample" enctype="multipart/form-data"  method="post" action="">
                         <div class="form-group">
                             <label for="p_name">Product name</label>
-                            <input type="text" class="form-control " name="p_name" id="p_name" placeholder="" required>
+                            <input type="text" class="form-control " name="p_name" value="<?php echo $p_name ?>" id="p_name" placeholder="" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="p_desc">Product description</label>
-                            <textarea type="text" class="form-control " name="p_desc" id="p_desc" required></textarea>
+                            <textarea type="text" class="form-control " value="<?php echo $description ?>" name="p_desc" id="p_desc" required readonly> <?php echo $description ?></textarea>
                         </div>
                         
                         <div class="form-group">
@@ -37,22 +52,22 @@
                       
                         <div class="form-group">
                             <label for="p_price">cgst - %</label>
-                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                            <input type="text" class="form-control " name="cgst" id="p_price" placeholder="" required>
                         </div>
                         <div class="form-group">
-                            <label for="p_price">Product price - ₹</label>
-                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                            <label for="p_price">sgst - %</label>
+                            <input type="text" class="form-control " name="sgst" id="p_price" placeholder="" required>
                         </div><div class="form-group">
-                            <label for="p_price">Product price - ₹</label>
-                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                            <label for="p_price">igst- %</label>
+                            <input type="text" class="form-control " name="igst" id="p_price" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="p_price">Product price - ₹</label>
-                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="eg. 100" required>
+                            <input type="text" class="form-control " name="p_price" id="p_price" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label for="p_discount">Product discount - ₹</label>
-                            <input type="text" class="form-control " name="p_discount" id="p_discount" value="0" placeholder="eg. 5" required>
+                            <input type="text" class="form-control " name="p_discount" id="p_discount" value="0" placeholder="" required>
                         </div>
                   
                        
@@ -63,32 +78,22 @@
             </div>
             <?php 
                 if(isset($_POST['add'])){
-                    $p_name=$_POST['p_name'];
-                    $p_desc=$_POST['p_desc'];
-                    // $p_size=$_POST['p_size'];
-                    $s_cat_id=$_POST['s_cat_id'];
-                    // $p_price=$_POST['p_price'];
-                    // $p_discount=$_POST['p_discount'];
-                    // $p_name=$_POST['p_name'];
-                     // file upload start 
-                     $p_photo=$_FILES['p_photo'];
-                     $p_photo_name=$_FILES["p_photo"]["name"];
+                    $p_id=$_GET['product_id'];
+                    $p_size=$_POST['p_size'];
+                    $p_price=$_POST['p_price'];
+                    $p_discount=$_POST['p_discount'];
+                    $cgst=$_POST['cgst'];
+                    $sgst=$_POST['sgst'];
+                    $igst=$_POST['igst'];
+
+                    $qry="INSERT INTO `product_price_details`( `fk_product_id`, `fk_size_id`, `price`, `discount`, `cgst`, `sgst`, `igst`) VALUES('$p_id','$p_size','$p_price','$p_discount','$cgst','$sgst','$igst')";
                    
-                    
-                     $qry="INSERT INTO `product`(`fk_sub_cat_id`, `fk_size_id`, `product_name`, `description`, `price`, `discount`,`photo`) VALUES ('$s_cat_id','$p_size','$p_name','$p_desc','$p_price','$p_discount','$p_photo_name')";
                      if(mysqli_query($con,$qry)){
-                        echo "<script>alert('product added')</script>";
+                        echo "<script>alert('product updated');
+                        location='./viewProduct.php'</script>";
                      }
 
-                    echo  $last_id = mysqli_insert_id($con);
-                     $dst_file_path="./resources/product/".$last_id;
-                     if(!is_dir($dst_file_path)){
-                         mkdir($dst_file_path,0777, true);
-                     }
-                  
-                     $dst=$dst_file_path."/".$p_photo_name;
-                     $file_status=move_uploaded_file($_FILES["p_photo"]["tmp_name"],$dst);
-                     echo "<script>location='./viewProduct.php'</script>";
+                   
 
                 }
             ?>
