@@ -1,10 +1,7 @@
 <?php
 // Define dynamic product images
 $productImages = [
-    'img/product-1.jpg',
-    'img/product-2.jpg',
-    'img/product-3.jpg',
-    'img/product-4.jpg',
+    $image
     // Add more image paths as needed
 ];
 ?>
@@ -23,11 +20,11 @@ $productImages = [
                 </div>
             <?php } ?>
         </div>
-        <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+        <!-- <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
             <i class="fa fa-2x fa-angle-left text-dark"></i>
         </a>
         <a class="carousel-control-next" href="#product-carousel" data-slide="next">
             <i class="fa fa-2x fa-angle-right text-dark"></i>
-        </a>
+        </a> -->
     </div>
 </div>

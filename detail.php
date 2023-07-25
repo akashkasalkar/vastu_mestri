@@ -1,11 +1,23 @@
-<?php include_once('./common/header.php'); ?>
-<?php
-$productData = array(
-    'name' => 'Product Name Goes Here',
-    'price' => '150.00',
-    'description' => 'Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt',
-    'sizeOptions' => array('XS', 'S', 'M', 'L', 'XL')
-);
+<?php 
+include_once('./common/header.php'); 
+include_once('./dbconn.php');
+include_once('./function/controller.php');
+
+$productData = [];
+if (isset($_REQUEST['product_id'])) {
+    $product_id = $_REQUEST['product_id'];
+    $productQuery = "SELECT p.product_id, p.product_name as name,p.description, p.photo, p2.ppd_id, p2.price, p2.discount, s.description as product_size FROM product p, product_price_details p2, size s WHERE p.product_id = p2.fk_product_id AND p2.fk_size_id = s.id AND p.product_id = '$product_id' ORDER BY p2.ppd_id DESC";
+    $productRes = getQueryResult($con, $productQuery);
+    foreach($productRes as $singleProduct){
+        extract($singleProduct);
+        $image = "./admin/resources/$product_id/$photo";
+        $productData[$product_id]['name'] = $name;
+        $productData[$product_id]['price'] = $price;
+        $productData[$product_id]['description'] = $description;
+        $productData[$product_id]['product_size'][] = $product_size;
+    }
+    $product_size = $productData[$product_id]['product_size'];
+}
 ?>
 
 <body>
@@ -25,14 +37,14 @@ $productData = array(
             <?php include('./common/product_carousel.php') ?>
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
-                    <h3><?php echo $productData['name']; ?></h3>
-                    <h3 class="font-weight-semi-bold mb-4">₹ <?php echo $productData['price']; ?> /-</h3>
+                    <h3><?php echo $productData[$product_id]['name']; ?></h3>
+                    <h3 class="font-weight-semi-bold mb-4">₹ <?php echo $productData[$product_id]['price']; ?> /-</h3>
 
                     <?php include('./common/size.php'); // Assuming size.php contains the dynamic generation of size options 
                     ?>
 
                     <h4 class="mb-3">Product Description</h4>
-                    <p class="mb-4"><?php echo $productData['description']; ?></p>
+                    <p class="mb-4"><?php echo $productData[$product_id]['description']; ?></p>
 
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
