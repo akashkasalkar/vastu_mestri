@@ -1,73 +1,55 @@
-<div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3"><?php echo $product_type;?></span></h2>
-    <div class="row px-xl-5">
-    <?php
-        // Array of featured products data
-        $featuredProducts = [
-            [
-                'name' => 'Product 1',
-                'image' => 'img/product-1.jpg',
-                'price' => 123.00,
-                'oldPrice' => 123.00,
-                'rating' => 4.5,
-                'reviews' => 99
-            ],
-            [
-                'name' => 'Product 2',
-                'image' => 'img/product-2.jpg',
-                'price' => 99.00,
-                'oldPrice' => 109.00,
-                'rating' => 4.2,
-                'reviews' => 75
-            ],
-            // Add more featured product data as needed
-        ];
+<?php
+include_once('./dbconn.php');
+include_once('./function/controller.php');
 
-        // Loop through the featured products array
+$featuredProducts = [];
+if (isset($_REQUEST['sub_cat_id'])) {
+    $sub_cat_id = $_REQUEST['sub_cat_id'];
+    $productQuery = "SELECT p.product_id, p.product_name, p.photo, p2.price, p2.discount, s.description as product_size FROM product p, product_price_details p2, size s WHERE p.product_id = p2.fk_product_id AND p2.fk_size_id = s.id AND p.fk_sub_cat_id = '$sub_cat_id' LIMIT 1";
+    $featuredProducts = getQueryResult($con, $productQuery);
+}
+
+?>
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3"><?php echo $product_type; ?></span></h2>
+    <div class="row px-xl-5">
+        <?php
+        // Loop through the products array
         foreach ($featuredProducts as $product) {
-            $name = $product['name'];
-            $image = $product['image'];
-            $price = $product['price'];
-            $oldPrice = $product['oldPrice'];
-            $rating = $product['rating'];
-            $reviews = $product['reviews'];
-    ?>
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
-                <div class="product-img position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="<?php echo $image; ?>" alt="">
-                    <div class="product-action">
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+            $product_id = $product['product_id'];
+            $name = $product['product_name'];
+            $photo = $product['photo'];
+            $image = "./admin/resources/$product_id/$photo";
+            $price =  $product['price'] - ($product['price'] * $product['discount'] / 100);
+            $oldPrice = $product['discount'] == 0 ? "" : $product['price'];
+            $discount = $product['discount'];
+        ?>
+            <a href="detail.php?product_id=<?= $product_id ?>" target="_blank" rel="noopener noreferrer">
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <div class="product-item bg-light mb-4">
+                        <div class="product-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="<?php echo $image; ?>" alt="">
+                        </div>
+                        <div class="text-center py-4">
+                            <a class="h6 text-decoration-none text-truncate" href=""><?php echo $name; ?></a>
+                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                <h5>₹<?php echo $price; ?>/-</h5>
+                                <?php if ($oldPrice != "") { ?>
+                                    <h6 class="text-muted ml-2"><del> ₹<?php echo $oldPrice; ?>/-</del></h6>
+                                <?php } ?>
+                            </div>
+                            <?php
+                            if ($discount != 0) { ?>
+                                <h6 style="color: green;"><?php echo $discount; ?>% off</h6>
+                            <?php }
+                            ?>
+
+                        </div>
                     </div>
                 </div>
-                <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href=""><?php echo $name; ?></a>
-                    <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5>$<?php echo $price; ?></h5>
-                        <h6 class="text-muted ml-2"><del>$<?php echo $oldPrice; ?></del></h6>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center mb-1">
-                        <?php
-                            // Generate star ratings dynamically
-                            $ratingStars = round($rating);
-                            for ($i = 1; $i <= 5; $i++) {
-                                if ($i <= $ratingStars) {
-                                    echo '<small class="fa fa-star text-primary mr-1"></small>';
-                                } else {
-                                    echo '<small class="fa fa-star mr-1"></small>';
-                                }
-                            }
-                        ?>
-                        <small>(<?php echo $reviews; ?>)</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php
+            </a>
+        <?php
         }
-    ?>
+        ?>
     </div>
 </div>

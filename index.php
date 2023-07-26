@@ -49,7 +49,7 @@
 
 
     <!-- Categories Start -->
-    <?php include_once('./common/categories.php'); ?>
+    <?php // include_once('./common/categories.php'); ?>
     <!-- Categories End -->
 
 
@@ -87,7 +87,7 @@
 
 
     <!-- Products Start -->
-    <?php $product_type="RECENT PRODUCTS"; include('./common/product.php'); ?>
+    <?php //$product_type="RECENT PRODUCTS"; include('./common/product.php'); ?>
     <!-- Products End -->
 
 
