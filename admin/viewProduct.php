@@ -62,6 +62,9 @@
                                                   <td colspan="6">
 
                                                     <table class="table table-stripped">
+                                                      <tr>
+                                                        
+                                                      </tr>
                                                       <?php 
                                                         $qry2="select * from product_price_details,size 
                                                         where  product_price_details.fk_size_id=size.id
