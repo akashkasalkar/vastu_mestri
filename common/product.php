@@ -20,7 +20,9 @@ if (isset($_REQUEST['sub_cat_id'])) {
             $product_id = $product['product_id'];
             $name = $product['product_name'];
             $photo = $product['photo'];
+
             $image = "../admin/resources/product/$product_id/$photo";
+
             $price =  $product['price'] - ($product['price'] * $product['discount'] / 100);
             $oldPrice = $product['discount'] == 0 ? "" : $product['price'];
             $discount = $product['discount'];
