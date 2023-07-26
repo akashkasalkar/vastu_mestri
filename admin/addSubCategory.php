@@ -46,7 +46,7 @@
                                     $qry="INSERT INTO `sub_category`( `fk_brand_id`, `name`, `discount`) VALUES('$brand_id','$cat_name','$discount')";
                                     if(mysqli_query($con,$qry)){
                                         echo "<script>
-                                            window.location='viewSubCategory.php'
+                                            window.location='viewSubCat.php'
                                         </script>";
                                     }
                                         else{
