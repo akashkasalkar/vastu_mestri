@@ -9,23 +9,23 @@
                                 </a> -->
                             <div class="card-body">
                                 
-                                <h4 class="card-title">Add new category</h4>
+                                <h4 class="card-title">Add new size</h4>
                                 
                                 <form class="forms-sample" method="post" enctype="multipart/form-data">   
                                     <div class="form-group">
-                                        <label for="cat_name">Category name</label>
-                                        <input type="text" class="form-control form-control-lg" name="cat_name" id="cat_name" placeholder=" ">
+                                        <label for="cat_name">Description</label>
+                                        <input type="text" class="form-control " name="description" id="cat_name" placeholder=" " required>
                                     </div>
                                     <button type="submit" class="btn btn-rounded btn-outline-primary" name="add">Add</button>
                                     <button class="btn btn-rounded btn-danger">Cancel</button>
                                 </form>
                                 <?php
                                     if(isset($_POST['add'])){
-                                        $cat_name=$_POST['cat_name'];
-                                    $qry="INSERT INTO `category`( `name`) VALUES ('$cat_name')";
+                                        $description=$_POST['description'];
+                                    $qry="INSERT INTO `size`( `description`) VALUES ('$description')";
                                     if(mysqli_query($con,$qry)){
                                         echo "<script>
-                                            window.location='viewCategory.php'
+                                            window.location='viewSize.php'
                                         </script>";
                                     }
                                         else{

@@ -1,4 +1,22 @@
 
+<?php 
+        include "../dbconn.php";
+        session_start();
+        if(!isset($_SESSION['email'])){
+            header("location:../index.php");
+
+        }
+        else{
+            $email=$_SESSION['email'];
+            $qry="select * from user where email='$email'";
+            $exc=mysqli_query($con,$qry);
+            while($row=mysqli_fetch_array($exc)){
+                $admin_id=$row['user_id'];
+                $admin_email=$row['email'];
+
+            }
+        }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,11 +119,11 @@
           <div class="dropdown-header text-center">
             <img class="img-md rounded-circle" src="./seller_styles/images/faces/profile/admin.png" alt="Profile image" width="150px">
             <p class="mb-1 mt-3 font-weight-semibold">Admin</p>
-            <p class="fw-light text-muted mb-0">ecart@gmail.com</p>
+            <p class="fw-light text-muted mb-0"><?php echo $admin_email ?></p>
           </div>
           <!-- <a class="dropdown-item" href="{% url 'seller_profile' %}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My -->
             <!-- Profile </a> -->
-          <a class="dropdown-item" href="{% url 'seller_logout' %}"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+          <a class="dropdown-item" href="./logout.php"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
         </div>
       </li>
     </ul>

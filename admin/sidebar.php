@@ -15,8 +15,29 @@
         <span class="menu-title">Categories</span>
         <i class="menu-arrow"></i>
       </a>
-
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./viewBrand.php" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-floor-plan"></i>
+        <span class="menu-title">Brand</span>
+        <i class="menu-arrow"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./viewSubCat.php" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-floor-plan"></i>
+        <span class="menu-title">Sub-Category</span>
+        <i class="menu-arrow"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./viewSize.php" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon mdi mdi-floor-plan"></i>
+        <span class="menu-title">Size</span>
+        <i class="menu-arrow"></i>
+      </a>
+    </li>
+    
     <li class="nav-item">
       <a class="nav-link" href="./viewProduct.php" aria-expanded="false" aria-controls="ui-basic">
         <i class="menu-icon mdi mdi-floor-plan"></i>
