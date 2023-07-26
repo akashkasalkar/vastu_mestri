@@ -83,7 +83,7 @@
                      $p_photo_name=$_FILES["p_photo"]["name"];
                    
                     
-                     $qry="INSERT INTO `product`(`fk_sub_cat_id`, `fk_size_id`, `product_name`, `description`, `price`, `discount`,`photo`) VALUES ('$s_cat_id','$p_size','$p_name','$p_desc','$p_price','$p_discount','$p_photo_name')";
+                     $qry="INSERT INTO `product`(`fk_sub_cat_id`, `product_name`, `description`,`photo`) VALUES ('$s_cat_id','$p_name','$p_desc','$p_photo_name')";
                      if(mysqli_query($con,$qry)){
                         echo "<script>alert('product added')</script>";
                      }
