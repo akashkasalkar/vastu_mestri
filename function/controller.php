@@ -1,5 +1,6 @@
-<?php 
-function getQueryResult($conn,$sql) {
+<?php
+function getQueryResult($conn, $sql)
+{
     // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
