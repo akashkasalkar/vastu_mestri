@@ -93,8 +93,11 @@
         } else {
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
+                if (newVal==0) {
+                    newVal=1;                  
+                }
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         button.parent().parent().find('input').val(newVal);
@@ -102,3 +105,6 @@
     
 })(jQuery);
 
+function showNotification(title, msg, color) {
+    document.getElementById('notify').innerHTML = `<div class="alert alert-dismissible fade show" role="alert" id="notification" style="background-color: ${color};"><strong id="alert-title">${title}</strong><p id="alert-msg">${msg}</p><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`;
+  }
