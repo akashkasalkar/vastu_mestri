@@ -28,7 +28,11 @@ if (isset($_POST['login'])) {
             $title = "Success";
             $msg = "Logged in successfully";
             $color = "#D5F5E3";
-            // redirect to home page
+            session_start();
+            $_SESSION['mobile'] = $loginRes[0]['phone'];
+            $_SESSION['uid'] = $loginRes[0]['user_id'];
+            header('location:index.php');
+
         } else {
             $title = "Error";
             $msg = "Invalid login details !";

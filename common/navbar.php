@@ -25,15 +25,25 @@
                         </a>
                         <div class="dropdown" style="display: inline-block;">
                             <a href="#" class="btn px-0 ml-3 dropdown-toggle" data-toggle="dropdown">
-                               <i class="fas fa-user text-primary"></i>
+                                <i class="fas fa-user text-primary"></i>
                             </a>
-                            <div class="dropdown-menu">
-                                <!-- Dropdown items -->
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Orders</a>
-                                <a class="dropdown-item" href="#">Logout</a>
-                                <!-- You can add more dropdown items here -->
-                            </div>
+                            <?php
+                            if (!isset($_SESSION['mobile'])) { ?>
+                                <div class="dropdown-menu">
+                                    <!-- Dropdown items -->
+                                    <a class="dropdown-item" href="./login.php">Login</a>
+                                </div>
+                            <?php  } else { ?>
+                                <div class="dropdown-menu">
+                                    <!-- Dropdown items -->
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="#">Orders</a>
+                                    <a class="dropdown-item" href="./common/controller.php?logout=true">Logout</a>
+                                    <!-- You can add more dropdown items here -->
+                                </div>
+                            <?php  }
+                            ?>
+
                         </div>
                     </div>
                 </div>
