@@ -31,8 +31,11 @@ if (isset($_POST['login'])) {
             session_start();
             $_SESSION['mobile'] = $loginRes[0]['phone'];
             $_SESSION['uid'] = $loginRes[0]['user_id'];
-            header('location:index.php');
-
+            if (isset($_REQUEST['cart'])) {
+                header('location:index.php');
+            }else{
+                header('location:index.php');
+            }
         } else {
             $title = "Error";
             $msg = "Invalid login details !";

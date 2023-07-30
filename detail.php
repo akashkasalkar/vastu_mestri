@@ -4,6 +4,8 @@ include_once('./dbconn.php');
 include_once('./function/controller.php');
 
 $productData = [];
+$qty = 1;
+$product_price_id = 1;
 if (isset($_REQUEST['product_id'])) {
     $product_id = $_REQUEST['product_id'];
     $productQuery = "SELECT p.product_id, p.product_name as name,p.description, p.photo, p2.ppd_id, p2.price, p2.discount, s.description as product_size FROM product p, product_price_details p2, size s WHERE p.product_id = p2.fk_product_id AND p2.fk_size_id = s.id AND p.product_id = '$product_id' ORDER BY p2.ppd_id DESC";
@@ -25,6 +27,11 @@ if (isset($_REQUEST['product_id'])) {
         $_discount = $discount != 0 ? $discount . " % off" : "";
     }
     $product_size = $productData[$product_id]['product_size'];
+}
+
+if (isset($_POST['addToCart'])) {
+    print_r($_POST);
+    extract($_POST);
 }
 ?>
 
@@ -49,7 +56,7 @@ if (isset($_REQUEST['product_id'])) {
                     <h3 id="price_id" class="font-weight-semi-bold mb-1">₹ <?php echo $productData[$product_id]['price']; ?> /-</h3>
                     <h6 id="old_price_id" class="text-muted ml-1" style="display: inline"><del> <?php echo $oldPrice; ?></del></h6>
                     <h6 id="discount_id" style="color: green;display: inline"><?php echo $_discount; ?></h6>
-                    <?php include('./common/size.php'); // Assuming size.php contains the dynamic generation of size options 
+                    <?php include('./common/size.php');
                     ?>
 
                     <h4 class="mb-3">Product Description</h4>
@@ -62,15 +69,20 @@ if (isset($_REQUEST['product_id'])) {
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" readonly class="form-control bg-secondary border-0 text-center" value="1">
+                            <input type="text" id="qty" readonly class="form-control bg-secondary border-0 text-center" value="<?= $qty ?>">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        <form method="POST">
+                            <input type="text" name="product_price_id" hidden readonly id="product_price_id" value="<?= $data['ppd_id'] ?>">
+                            <input type="text" id="qty_id" name="qty" hidden readonly value="<?= $qty ?>">
+                            <input type="text" name="product_id" id="product_id" value="<?= $product_id ?>" hidden>
+                            <button onclick="APICallCart(<?=$product_id?>,<?=$qty?>)" type="button" name="addToCart" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                                Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -78,6 +90,7 @@ if (isset($_REQUEST['product_id'])) {
     </div>
     <!-- Shop Detail End -->
     <script src="./js/dynamic_price.js"></script>
+    <script src="./js/cart.js"></script>
     <!-- Footer Start -->
     <?php include_once('./common/footer.php'); ?>
     <!-- Footer End -->
