@@ -32,8 +32,8 @@ if (isset($_POST['login'])) {
             $_SESSION['mobile'] = $loginRes[0]['phone'];
             $_SESSION['uid'] = $loginRes[0]['user_id'];
             if (isset($_REQUEST['cart'])) {
-                header('location:index.php');
-            }else{
+                header('location:' . $_SESSION["prv_page"]);
+            } else {
                 header('location:index.php');
             }
         } else {

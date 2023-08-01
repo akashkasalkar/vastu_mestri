@@ -80,7 +80,7 @@ if (isset($_POST['addToCart'])) {
                             <input type="text" name="product_price_id" hidden readonly id="product_price_id" value="<?= $data['ppd_id'] ?>">
                             <input type="text" id="qty_id" name="qty" hidden readonly value="<?= $qty ?>">
                             <input type="text" name="product_id" id="product_id" value="<?= $product_id ?>" hidden>
-                            <button onclick="APICallCart(<?=$product_id?>,<?=$qty?>)" type="button" name="addToCart" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            <button onclick="APICallCart()" type="button" name="addToCart" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                                 Cart</button>
                         </form>
                     </div>
@@ -89,6 +89,7 @@ if (isset($_POST['addToCart'])) {
         </div>
     </div>
     <!-- Shop Detail End -->
+
     <script src="./js/dynamic_price.js"></script>
     <script src="./js/cart.js"></script>
     <!-- Footer Start -->

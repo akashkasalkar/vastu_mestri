@@ -1,6 +1,9 @@
-function APICallCart(product_id, qty) {
+function APICallCart() {
+    var product_id = document.getElementById('product_id').value;
+    var qty = document.getElementById('qty_id').value;
+    var product_price_id = document.getElementById('product_price_id').value;
     // Replace 'your_api_endpoint' with the actual endpoint of your API
-    var apiEndpoint = './function/cart.php?addToCart=1';
+    var apiEndpoint = './function/cart.php';
 
     // Create an XMLHttpRequest object
     var xhr = new XMLHttpRequest();
@@ -17,6 +20,9 @@ function APICallCart(product_id, qty) {
             // updateHTMLWithData(responseData);
             if (responseData.data[0]['error'] == 101) {
                 window.location.href = "login.php?cart=1";
+            }else{
+                // alert(JSON.stringify(responseData));
+
             }
         } else {
             // Handle the error, if any
@@ -31,7 +37,8 @@ function APICallCart(product_id, qty) {
 
     var requestData = {
         product_id: product_id,
-        qty: qty
+        qty: qty,
+        product_price_id : product_price_id
         // Add any other data you want to send in the POST request
     };
     // Send the request
