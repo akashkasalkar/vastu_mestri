@@ -21,3 +21,29 @@ function getQueryResult($conn, $sql)
     }
     return $data;
 }
+
+function generateInsertQuery($table, $data, $conn)
+{
+    if (empty($data)) {
+        return false;
+    }
+    $columns = [];
+    $values = [];
+    foreach ($data as $column => $value) {
+        $columns[] = "`" . $column . "`";
+        $values[] = "'" . mysqli_real_escape_string($conn, $value) . "'";
+    }
+    $columns_str = implode(", ", $columns);
+    $values_str = implode(", ", $values);
+    $insertQuery = "INSERT INTO `$table` ($columns_str) VALUES ($values_str);";
+    return $insertQuery;
+}
+
+function insert($query, $conn)
+{
+    if (mysqli_query($conn, $query)) {
+        return true; // Query executed successfully
+    } else {
+        return false; // Query execution failed
+    }
+}

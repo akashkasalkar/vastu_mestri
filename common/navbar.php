@@ -15,25 +15,35 @@
                         <?php include('./common/nav_cat.php'); ?>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a href="" class="btn px-0">
+                        <!-- <a href="" class="btn px-0">
                             <i class="fas fa-heart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
+                        </a> -->
                         <a href="" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                         </a>
                         <div class="dropdown" style="display: inline-block;">
                             <a href="#" class="btn px-0 ml-3 dropdown-toggle" data-toggle="dropdown">
-                               <i class="fas fa-user text-primary"></i>
+                                <i class="fas fa-user text-primary"></i>
                             </a>
-                            <div class="dropdown-menu">
-                                <!-- Dropdown items -->
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Orders</a>
-                                <a class="dropdown-item" href="#">Logout</a>
-                                <!-- You can add more dropdown items here -->
-                            </div>
+                            <?php
+                            if (!isset($_SESSION['mobile'])) { ?>
+                                <div class="dropdown-menu">
+                                    <!-- Dropdown items -->
+                                    <a class="dropdown-item" href="./login.php">Login</a>
+                                </div>
+                            <?php  } else { ?>
+                                <div class="dropdown-menu">
+                                    <!-- Dropdown items -->
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="#">Orders</a>
+                                    <a class="dropdown-item" href="./common/controller.php?logout=true">Logout</a>
+                                    <!-- You can add more dropdown items here -->
+                                </div>
+                            <?php  }
+                            ?>
+
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ if (isset($_REQUEST['sub_cat_id'])) {
             $name = $product['product_name'];
             $photo = $product['photo'];
 
-            $image = "../admin/resources/product/$product_id/$photo";
+            $image = "./admin/resources/product/$product_id/$photo";
 
             $price =  $product['price'] - ($product['price'] * $product['discount'] / 100);
             $oldPrice = $product['discount'] == 0 ? "" : $product['price'];
@@ -35,7 +35,7 @@ if (isset($_REQUEST['sub_cat_id'])) {
                             <img class="img-fluid w-100" src="<?php echo $image; ?>" alt="">
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href=""><?php echo $name; ?></a>
+                            <a class="h6 text-decoration-none text-truncate" href="detail.php?product_id=<?= $product_id ?>"><?php echo $name; ?></a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5>₹<?php echo $price; ?>/-</h5>
                                 <?php if ($oldPrice != "") { ?>
